@@ -1,6 +1,10 @@
 # ALY6980
 
-Run
+You have to install python and django before running the website.
+
+Following the instruction here: https://docs.djangoproject.com/en/3.0/intro/install/
+
+After installing all the requirement, run:
 
 git clone https://github.com/YantingGuo/ALY6980.git 
 
