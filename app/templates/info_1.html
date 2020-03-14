@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Third Page</title>
+</head>
+<style>
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}   
+</style>
+
+<body>
+    <form action="#" class="p-5 bg-white">
+              
+        <h2 class="h4 text-black mb-5">Further Information</h2> 
+
+        <div class="row form-group">
+          <div class="col-md-12 mb-3 mb-md-0">
+            <label class="text-black" for="fname">what type of issue do you think?</label>
+            <input type="text" id="fname" class="form-control">
+            <label class="container">Crack
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Hole
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Obstacle
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Snow
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Plant
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          
+            <div class="col-md-12">
+                <label class="text-black" for="Location">Location</label>
+                <input type="Location" id="Location" class="form-control">
+            </div>
+        </div>
+
+        <div class="row form-group">
+          
+          <div class="col-md-12">
+            <label class="text-black" for="Date">Date</label> 
+            <input type="Date" id="Date" class="form-control">
+          </div>
+        </div>
+        
+        <div class="row form-group">
+          
+            <div class="col-md-12">
+              <label class="text-black" for="Email">Email</label> 
+              <input type="Email" id="Email" class="form-control">
+            </div>
+          </div>
+
+        <div class="row form-group">
+          <div class="col-md-12">
+            <input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
+          </div>
+        </div>
+
+
+      </form
+
+</body>
+</html>
