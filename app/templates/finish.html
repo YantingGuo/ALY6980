@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+    <!--<link href="styles/style.css" rel="stylesheet">-->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>Submit Success!</h1>
+    <img src="{% static 'images/thankyou.jpg' %}" alt="my test picture.">
+
+    <p>Go back to <a href="/app/">home page </a> to report new issue.</p>
+
+
+    <script src="{% static 'finish.js' %}"></script>
+  </body>
+</html>

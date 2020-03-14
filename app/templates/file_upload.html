@@ -3,12 +3,12 @@
 {% block content %}
 
   {% if uploaded_file_url %}
-    <p>This issue has already been solved. Thanks! </p>
+    <p>This problem has already been solved. Thank you! </p>
     <img src="{{ uploaded_file_url }}" alt="Image" class="img-fluid">
-    <p>If you think this issue is danger, please provide more information <a href="/app/further_info">Clike here</a></p>
+      <p>If you think this issue is danger, please provide more information <a href="/app/info_form">Click Here</a></p>
   {% else %}
-   <p>Fail to upload image. </p>
-   <a href="/app">Clike here to upload image again.</a>
+      <p>Fail to upload image. </p>
+      <p><a href="/app/">Click Here</a> to upload the image again.</p>
   {% endif %}
 
 {% endblock %}

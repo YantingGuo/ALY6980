@@ -1,14 +1,22 @@
-from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render, redirect
 
 # Create your views here.
+
 from django.http import HttpResponse
 
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 
 def index(request):
     return render(request, "index.html")
+
+
+def info_form(request):
+    return render(request, 'info_form.html')
+
 
 def upload_file(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -20,5 +28,20 @@ def upload_file(request):
             'uploaded_file_url': uploaded_file_url
         })
     return render(request, 'file_upload.html')
-def further_info(request):
-   return render(request, 'info_1.html') 
+
+
+def finish(request):
+    label = request.POST.get('type-issue')
+    label2 = request.POST.get('class')
+    location = request.POST.get('location')
+    date = request.POST.get('date')
+    email = request.POST.get('email')
+    message = request.POST.get('message')
+    print(label, label2, location, date, email, message)
+    #context = {'data': data}
+    return render(request, 'finish.html')
+
+
+
+
+

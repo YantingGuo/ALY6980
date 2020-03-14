@@ -20,3 +20,9 @@ urlpatterns = [
     path('app/', include('app.urls')),
     path('admin/', admin.site.urls),
 ]
+
+# add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='app/', permanent=True)),
+]
