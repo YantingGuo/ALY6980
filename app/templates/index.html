@@ -112,7 +112,11 @@
             <h1 class="text-uppercase" data-aos="fade-up">Welcome</h1>
             <p class="mb-5 desc"  data-aos="fade-up" data-aos-delay="100">Safe Roads for a Safer Future.</p>
             <div data-aos="fade-up" data-aos-delay="100">
-              <a href="#contact-section" class="btn smoothscroll btn-primary mr-2 mb-2">Upload Image Now</a>
+              <form method="post" enctype="multipart/form-data" action="upload">
+                {% csrf_token %}
+                <input type="file" name="myfile">
+                <button type="submit">Upload</button>
+              </form>
             </div>
           </div>
             
