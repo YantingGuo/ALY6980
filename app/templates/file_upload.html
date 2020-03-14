@@ -1,0 +1,12 @@
+{% load static %}
+
+{% block content %}
+
+  {% if uploaded_file_url %}
+    <p>Uploaded Image: </p>
+    <img src="{{ uploaded_file_url }}" alt="Image" class="img-fluid">
+  {% else %}
+   <p>Fail to upload image. </p>
+  {% endif %}
+
+{% endblock %}
