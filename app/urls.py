@@ -8,6 +8,4 @@ urlpatterns = [
     # path('info_form', views.request_page, name='info-form'),
     path('info_form', views.info_form, name='form'),
     url(r'^finish/$', views.finish, name='finish'),
-
-
 ]
