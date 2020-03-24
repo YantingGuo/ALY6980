@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'sql_server.pyodbc',
         'NAME': 'records',
         'USER': 'aly6980',
-        'PASSWORD': '******',
+        'PASSWORD': 'Capstone+',
         'HOST': 'aly6980.database.windows.net',
         'PORT': '1433',
 
