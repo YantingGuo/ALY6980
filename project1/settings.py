@@ -77,9 +77,17 @@ WSGI_APPLICATION = 'project1.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'records',
+        'USER': 'aly6980',
+        'PASSWORD': '******',
+        'HOST': 'aly6980.database.windows.net',
+        'PORT': '1433',
+
+        'OPTIONS': {
+            'driver':'ODBC Driver 17 for SQL Server',
+        },
+    },
 }
 
 
