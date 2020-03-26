@@ -2,16 +2,16 @@
 
 {% block content %}
 
-{% if uploaded_file_url and issue == "reported" %}
+{% if uploaded_file_url and issue == "Reported" %}
     <p>We noticed the problem. Thank you! </p>
     <p>Please provide more information for further process. <a href="/app/info_form">Click Here</a></p>
     <img src="{{ uploaded_file_url }}" alt="Image" class="img-fluid">
-{% elif uploaded_file_url and issue != "reported" %}
+{% elif uploaded_file_url and issue == "Closed" %}
     <p>This problem has already been solved. Thank you! </p>
     <p>If you think this issue is danger, please provide more information <a href="/app/info_form">Click Here</a></p>
     <img src="{{ uploaded_file_url }}" alt="Image" class="img-fluid">
 {% else %}
-     <p>Fail to upload image. </p>
+     <p>Fail to process image. </p>
      <a href="/app/">Click Here to upload the image again.</a>
 {% endif %}
 
