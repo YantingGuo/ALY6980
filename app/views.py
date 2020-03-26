@@ -15,23 +15,29 @@ def index(request):
 
 
 def info_form(request):
-    return render(request, 'info_form.html')
+    uploaded_file_url = request.session.get('uploaded_file_url')
+    return render(request, 'info_form.html', {
+        'uploaded_file_url': uploaded_file_url
+    })
 
 
 def upload_file(request):
     try:
         if request.method == 'POST' and request.FILES['myfile']:
             myfile = request.FILES['myfile']
-            fs1 = FileSystemStorage(os.path.join(BASE_DIR, "app/static/images/upload/"))
-            fs2 = FileSystemStorage(os.path.join(BASE_DIR, "app/static/images/upload/test/"))
+            prediction_path = "app/static/images/upload/test/"
+            storage_path = "app/static/images/upload/"
+            fs1 = FileSystemStorage(os.path.join(BASE_DIR, storage_path))
+            fs2 = FileSystemStorage(os.path.join(BASE_DIR, prediction_path))
             filename = fs1.save(myfile.name, myfile)
             filename = fs2.save(myfile.name, myfile)
-            uploaded_file_url = '/static/images/upload/test/' + fs2.url(filename)
+            uploaded_file_url = "/static/images/upload/" + fs1.url(filename)
             image=Imagerecord(url=uploaded_file_url)
             t=image.label
             fs2.delete(myfile.name)
+            request.session['uploaded_file_url'] = uploaded_file_url
             return render(request, "file_upload.html", {
-                'uploaded_file_url': '/static/images/upload/' + fs1.url(filename), 'issue': t
+                'uploaded_file_url': uploaded_file_url, 'issue': t
             })
     except Exception as e:
         print(e)
