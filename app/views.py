@@ -22,16 +22,19 @@ def upload_file(request):
     try:
         if request.method == 'POST' and request.FILES['myfile']:
             myfile = request.FILES['myfile']
-            fs = FileSystemStorage(os.path.join(BASE_DIR, "app/static/images/upload"))
-            filename = fs.save(myfile.name, myfile)
-            uploaded_file_url = '/static/images/upload/' + fs.url(filename)
-            image=Imagerecord(url=str(uploaded_file_url))
-            image.save()
-            t=Imagerecord.label.filter(url=str(uploaded_file_url))
+            fs1 = FileSystemStorage(os.path.join(BASE_DIR, "app/static/images/upload/"))
+            fs2 = FileSystemStorage(os.path.join(BASE_DIR, "app/static/images/upload/test/"))
+            filename = fs1.save(myfile.name, myfile)
+            filename = fs2.save(myfile.name, myfile)
+            uploaded_file_url = '/static/images/upload/test/' + fs2.url(filename)
+            image=Imagerecord(url=uploaded_file_url)
+            t=image.label
+            fs2.delete(myfile.name)
             return render(request, "file_upload.html", {
-                'uploaded_file_url': uploaded_file_url, 'issue': t
+                'uploaded_file_url': '/static/images/upload/' + fs1.url(filename), 'issue': t
             })
-    except:
+    except Exception as e:
+        print(e)
         return render(request, 'file_upload.html')
     return render(request, 'file_upload.html')
 

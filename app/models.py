@@ -2,6 +2,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import tensorflow as tf
 from django.db import models as md
 from tensorflow.keras import datasets, layers, models
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 import time
 
@@ -14,11 +15,11 @@ class Imagerecord(md.Model):
         img = tf.image.decode_jpeg(img, channels=3)
         img = tf.image.convert_image_dtype(img, tf.float32)
         return tf.image.resize(img, [IMG_WIDTH, IMG_HEIGHT])
-    def process_path(file_path):
+    def process_path(self, file_path):
         label = get_label(file_path)
         img = tf.io.read_file(file_path)
         img = decode_img(img)
-        return img, label
+        return img
     def prepare_for_training(ds, cache=True, shuffle_buffer_size=1000):
         if cache:
             if isinstance(cache, str):
@@ -32,20 +33,30 @@ class Imagerecord(md.Model):
     def result_1(self):
         CLASS_NAMES=np.array(['closed', 'reported'])
         IMG_HEIGHT = 224
-        IMG_WIDTH = 224      
-        list_ds = tf.data.Dataset.list_files(str(self.url))
-        labeled_ds = list_ds.map(process_path)
-        train_ds = prepare_for_training(labeled_ds)
-        image_batch, label_batch__ = next(iter(train_ds))
+        IMG_WIDTH = 224
+        file_path = '/Users/yanting/code/new/ALY6980/app/static/images/upload/'
+        image_generator = ImageDataGenerator(rescale=1./255,
+            rotation_range=45,
+            width_shift_range=.15,
+            height_shift_range=.15,
+            horizontal_flip=True,
+            zoom_range=0.5,
+            fill_mode='nearest')
+        data_gen = image_generator.flow_from_directory(
+            batch_size=1,
+            directory=file_path,
+            shuffle=True,
+            target_size=(IMG_HEIGHT, IMG_WIDTH))
+        image_batch, label_batch = next(data_gen)
         t = time.time()
         import_path = 'app/DensNetmodel_aug_1st.h5'.format(int(t))
         reloaded = tf.keras.models.load_model(import_path)
-        reloaded_result_batch = reloaded.predict(image_batch2)
+        reloaded_result_batch = reloaded.predict(image_batch)
         predicted_id = np.argmax(reloaded_result_batch, axis=-1)
         predicted_label_batch = CLASS_NAMES[predicted_id]
         label_id = np.argmax(label_batch, axis=-1)
         result=predicted_label_batch[0].title()
-        return(result)
+        return result
     def result_2(self):
         CLASS_NAMES=np.array(['crack', 'hole', 'obstacle', 'plant', 'snow'])
         IMG_HEIGHT = 224
@@ -57,12 +68,12 @@ class Imagerecord(md.Model):
         t = time.time()
         import_path = 'app/DensNetmodel_multi.h5'.format(int(t))
         reloaded = tf.keras.models.load_model(import_path)
-        reloaded_result_batch = reloaded.predict(image_batch2)
+        reloaded_result_batch = reloaded.predict(image_batch)
         predicted_id = np.argmax(reloaded_result_batch, axis=-1)
         predicted_label_batch = CLASS_NAMES[predicted_id]
         label_id = np.argmax(label_batch, axis=-1)
         result=predicted_label_batch[0].title()
-        return(result)
+        return result
     label = property(result_1)
     label2 = property(result_2)
     
